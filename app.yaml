@@ -1,0 +1,51 @@
+runtime: php73
+
+
+
+runtime_config:
+    document_root: .
+
+
+    
+handlers:
+
+- url: /(.+\.(gif|png|jpg|jpeg|css|js|json|well-known|woff|min.css|mp3|m4r|txt|xml))$
+  static_files: public/\1
+  upload: public/.+\.(gif|png|jpg|jpeg|css|js|json|well-known|woff|min.css|mp3|m4r|txt|xml)$
+  
+  
+- url: /.*
+  secure: always
+  redirect_http_response_code: 301
+  script: auto
+  
+
+  
+- url: /(.+\.(gif|png|jpg|jpeg))$
+  static_files: \1
+  upload: .+\.(gif|png|jpg|jpeg)$
+  
+
+- url: /(.+\.(js))$
+  static_files: \1
+  upload: .+\.(js)$
+  
+- url: .*
+  script: auto
+  
+
+
+env_variables:
+    APP_KEY: base64:kwlse5nO3E/4l5Wxlg7UsIkolg0Fan4xD3eCPrHkFEQ=
+    APP_STORAGE: /tmp
+    VIEW_COMPILED_PATH: /tmp
+    SESSION_DRIVER: cookie
+
+
+    CLOUD_SQL_CONNECTION_NAME: "mysql:unix_socket=/cloudsql/linksxup:europe-west2:prelaunch-db"
+    MYSQL_DB: "prelaunch-db"
+    MYSQL_USER: "prelaunch"
+    MYSQL_PASS: "prelaunch"
+    
+
+
