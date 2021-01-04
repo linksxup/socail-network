@@ -1,0 +1,100 @@
+if(isset($_GET["un"]))
+{$name=$_GET["un"];}elseif(!isset($_GET["un"]) || empty($_GET["un"])){
+	
+	header("location: testt.php");
+        exit();
+}
+
+
+
+else{
+					echo'<div class="caption">
+            <img src="'; echo$ro["url"]; echo'" alt="Cat 1">';
+			
+			if($ro["caption"] != '')
+			{echo'<div id="m">
+<div class="postWraper"><font color="#fff">';
+
+
+$reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/"; //
+$reg_exUr="/#+([a-zA-Z0-9_]+)/";//for hash tags
+$reg_exU="/(#)[a-z A-Z0-9.]+[A-Za-z.]+(#)/i";//for letter boldness
+$reg="/@+([a-zA-Z0-9-]+)/";//for username reference
+
+
+ $half= substr("$ro[caption]","0", "400");
+
+
+
+  if(preg_match($reg, $half, $url)){ // Username @ tag..
+
+ echo preg_replace($reg, "<a href='/info.php?un=$1'><font color='57b846'>$0</font></a>", nl2br($half));  echo '</br>';
+ 
+ }
+ 
+   /////////////
+ elseif(preg_match($reg_exU, $half, $url)){ // for text boldness
+
+ echo preg_replace($reg_exU, "<b>$0</b>", nl2br($half)); echo '</br>';
+ 
+ }
+ 
+  ///////////////
+ elseif(preg_match($reg_exUr, $half, $url) ){ // For Hashtag recognition
+ 
+ echo preg_replace($reg_exUr, "<a href='/hashtags.php?query=$1'><font color='57b846'>$0</font></a>", nl2br($half));  echo '</br>';
+ 
+ }
+ 
+/////////////////
+  elseif(preg_match($reg_exUrl, $half, $url)) { // make the urls hyper links
+
+ echo preg_replace($reg_exUrl, "<a href='$0'><font color='57b846'>$0</font></a>", nl2br($half));  echo '</br>';
+ 
+ }
+
+
+
+
+
+
+ else { // if no urls in the text just return the text
+  echo nl2br(substr("$ro[caption]","0", "400"));}
+			
+
+
+
+		echo'</font>';}
+
+ echo'<b><h6>';
+ 
+ echo'<font color="#fff">';  echo substr("$ro[time]","10", "400");  
+ echo'</font>';
+
+ if($user == $name)
+ {echo'&nbsp <a href="delete.php?uniqueid='; echo$ro["uniqueid"]; echo'&status=imagemoment">';
+ echo'<font color="#fff"><i class="fa fa-trash-o"></i></font></a>';}
+   
+if($user == $name)   
+{echo'&nbsp <a href="viewers.php?uniqueid='; echo$ro["uniqueid"]; echo'">
+<font color="#fff">';
+
+
+if($ro["viewers"] != '')
+{print_r(count(unserialize($ro["viewers"])));}
+
+
+
+
+echo'<i class="fa fa-eye"></i></font></a>';}
+   
+  echo' </h6>
+   </b>';
+
+echo'</div>  
+ </div>
+			
+			</div>';
+			
+			
+		}		
