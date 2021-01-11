@@ -196,7 +196,7 @@ if(isset($user))
 		 $diff=date_diff($date1, $date2);
 		 //echo $diff->format("%a days");
 		 
-		 if($diff->format("%a") > 4 && $row['achieve'] == 'read' ){
+		 if($diff->format("%a") >= 2 && $row['achieve'] == 'read' ){
 		 $d=mysqli_query($link, "DELETE FROM notifications WHERE  username='$user' AND time='$time'");}
 			 
 			 
@@ -654,7 +654,7 @@ $st=mysqli_query($link, "UPDATE notifications SET achieve = 'read' WHERE usernam
 		 $diff=date_diff($date1, $date2);
 		
 		 
-		 if($diff->format("%a") > 2 && $row['achieve'] == 'read' ){
+		 if($diff->format("%a") >= 2 && $row['achieve'] == 'read' ){
 	   $d=mysqli_query($link, "DELETE FROM notifications WHERE  username='$user' AND time='$time' ");}
 	   
 	   
@@ -888,7 +888,7 @@ $st=mysqli_query($link, "UPDATE notifications SET achieve = 'read' WHERE usernam
 		 $diff=date_diff($date1, $date2);
 		
 		 
-		 if($diff->format("%a") > 2 && $row['achieve'] == 'read' ){
+		 if($diff->format("%a") >= 2 && $row['achieve'] == 'read' ){
 	   $d=mysqli_query($link, "DELETE FROM notifications WHERE  username='$user' AND time='$time' ");}
 	   
 	   
